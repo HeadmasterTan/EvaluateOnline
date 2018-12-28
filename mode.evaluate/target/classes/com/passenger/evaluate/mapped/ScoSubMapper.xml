@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.passenger.evaluate.mapped.ScoSubMapper" >
+  <resultMap id="BaseResultMap" type="com.passenger.evaluate.entity.ScoSub" >
+    <id column="SUBJECTID" property="subjectid" jdbcType="VARCHAR" />
+    <result column="CONTENTDESC" property="contentdesc" jdbcType="VARCHAR" />
+    <result column="WGHVALUE" property="wghvalue" jdbcType="DOUBLE" />
+  </resultMap>
+  <select id="selectAboutAll" resultMap="BaseResultMap">
+  	select * from t_scoSub 
+  </select>
+</mapper>

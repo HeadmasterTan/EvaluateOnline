@@ -2,11 +2,12 @@ package com.passenger.evaluate.mapped;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.passenger.evaluate.entity.LoginInfo;
 
 public interface LoginInfoMapper {
 	
-	int countByExample(LoginInfo loginInfoExample);
+	List<LoginInfo> selectByAacctno (@Param("acctno")String acctno,@Param("pwd")String pwd);
 	
-	List<LoginInfo>selectByExample(LoginInfo loginInfoExample);
 }
