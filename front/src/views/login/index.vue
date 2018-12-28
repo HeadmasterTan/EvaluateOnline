@@ -5,10 +5,10 @@
             <div class="content">
                 <Form ref="loginForm" :model="loginForm" :rules="validates">
                     <FormItem prop="acctno">
-                        <Input class="item" v-model="loginForm.acctno" prefix="ios-person" size="large" placeholder="账号" />
+                        <Input class="item" v-model="loginForm.acctno" prefix="ios-person" size="large" placeholder="账号" @on-enter="login" />
                     </FormItem>
                     <FormItem prop="pwd">
-                        <Input class="item" v-model="loginForm.pwd" prefix="ios-lock" type="password" size="large" placeholder="密码" />
+                        <Input class="item" v-model="loginForm.pwd" prefix="ios-lock" type="password" size="large" placeholder="密码" @on-enter="login" />
                     </FormItem>
                 </Form>
             </div>
@@ -35,7 +35,7 @@ export default {
         login() {
             this.$refs.loginForm.validate(valid => {
                 if (valid) {
-
+                    this.$router.push('/rate');
                 } else {
                     this.$Message.error('请完善登录信息！');
                 }
