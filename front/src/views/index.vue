@@ -1,15 +1,17 @@
 <template>
     <div class="main">
         <Layout class="layout">
-            <Header v-show="!isLogin" class="header">
+            <Header v-if="!isLogin" class="header">
                 <div class="brand"><span>员工互评系统</span></div>
                 <div class="user">
                     <span>{{userInfo.name}}</span> 丨
-                    <a class="logout">退出</a>
+                    <a class="logout" @click="logout">退出</a>
                 </div>
             </Header>
             <Content>
-                <router-view></router-view>
+                <transition name="fade" mode="out-in">
+                    <router-view></router-view>
+                </transition>
             </Content>
         </Layout>
     </div>
@@ -27,6 +29,11 @@
         computed: {
             isLogin() {
                 return this.$route.path.indexOf('login') > -1;
+            }
+        },
+        methods: {
+            logout() {
+                this.$router.push('/login');
             }
         }
     }
@@ -67,5 +74,14 @@
 }
 .user .logout:hover {
     color: #c5c5c5;
+}
+
+@media screen and (max-width: 550px) {
+    .main .brand {
+        width: calc(100% - 80px);
+    }
+    .main .user {
+        margin-right: -10px;
+    }
 }
 </style>
