@@ -75,4 +75,13 @@
 .user .logout:hover {
     color: #c5c5c5;
 }
+
+@media screen and (max-width: 550px) {
+    .main .brand {
+        width: calc(100% - 80px);
+    }
+    .main .user {
+        margin-right: -10px;
+    }
+}
 </style>

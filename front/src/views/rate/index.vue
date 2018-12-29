@@ -228,11 +228,27 @@ export default {
     border-radius: 10px;
     background-color: #F5F5F5;
 }
+
+@media screen and (max-width: 550px) {
+    .rate {
+        width: 100%;
+        padding-bottom: 18px;
+    }
+    .rate-top {
+        flex-wrap: wrap;
+        padding: 15px 25px;
+    }
+    .rate-top .rate-info {
+        margin: 15px 0 0 75px;
+        height: 32px;
+    }
+}
 </style>
 <style>
 .card-item .ivu-card-head p {
     overflow: visible;
     white-space: pre-wrap;
+    text-align: justify;
 }
 .select-list .ivu-radio-group {
     width: 100%;

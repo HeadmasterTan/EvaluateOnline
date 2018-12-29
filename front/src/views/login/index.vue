@@ -71,4 +71,16 @@ export default {
 .btn {
     margin-top: 5px;
 }
+
+@media screen and (max-width: 550px) {
+    .login-box {
+        padding: 20px;
+        width: 300px;
+        height: 250px;
+    }
+    .title {
+        margin-bottom: 15px;
+        color: #fff;
+    }
+}
 </style>
