@@ -4,15 +4,14 @@
         <section class="rate-top">
             <section class="top-flex">
                 <span class="label">待评价人：</span>
-                <Select class="top-select" v-model="selectedPerson">
+                <Select class="top-select" v-model="selectedPerson" @on-change="changePerson">
                     <Option v-for="item in ratePerson" :key="item.id" :value="item.id" :label="item.name"></Option>
                 </Select>
             </section>
-
             <section class="top-flex rate-info">
                 <span class="label long">已评价 / 总人数</span>
                 <div class="divider"></div>
-                <span class="value">1 / {{ ratePerson.length }}</span>
+                <span class="value">{{ ratedNum }} / {{ ratePerson.length }}</span>
             </section>
         </section>
         <!-- 选项内容 -->
@@ -34,6 +33,7 @@
                 <Button class="submit-btn" type="success" @click="submitAnswer">提 交</Button>
             </div>
         </section>
+        <!-- 提示语 -->
         <section class="empty" v-if="ratePerson.length > 0">
             请选择待评价人后开始评价。
         </section>
@@ -49,6 +49,9 @@ export default {
         return {
             selectedPerson: '', // 当前选中的人
             answers: [], // 当前选中的答案
+            ratedNum: 1, // 已评价人数
+
+            // 评价人列表
             ratePerson: [{
                 id: 1,
                 name: '谭新'
@@ -65,6 +68,7 @@ export default {
                 id: 5,
                 name: '谭老板'
             }],
+            // 评价题目
             subjectList: [{
                 title: '员工表现',
                 type: 'single',
@@ -72,18 +76,6 @@ export default {
                     message: '好'
                 }, {
                     message: '一般'
-                }, {
-                    message: '差'
-                }]
-            }, {
-                title: '员工态度',
-                type: 'single',
-                options: [{
-                    message: '好'
-                }, {
-                    message: '一般'
-                }, {
-                    message: '合格'
                 }, {
                     message: '差'
                 }]
@@ -101,7 +93,7 @@ export default {
                 }]
             }, {
                 title: '文本过长测试文本过长测试文本过长测试文本过长测试文本过长测试文本过长测试文本过长测试文本过长测试文本过长测试文本过长测试文本过长测试文本过长测试文本过长测试文本过长测试文本过长测试文本过长测试',
-                type: 'multiple',
+                type: 'single',
                 options: [{
                     message: 'a'
                 }, {
@@ -114,16 +106,63 @@ export default {
             }]
         }
     },
-    created() {
-        // this.subjectList = [].concat(this.subjectList, this.subjectList, this.subjectList, this.subjectList);
-    },
     methods: {
+        /**
+         * 将数字转化为大写字母
+         */
         changeNumToEng(num) {
             let upCharNum = 65 + num; // 65 就是 A
             return String.fromCharCode(upCharNum);
         },
+        /**
+         * 将大写字母转化为数字
+         */
+        changeEndToNum(eng) {
+            return eng.charCodeAt() - 64
+        },
+        /**
+         * 提交评价答案
+         */
         submitAnswer() {
-            console.log(this.answers);
+            const OPTIONS_LENGTH = this.subjectList.length;
+            let answers = [];
+            for (let i = 0; i < OPTIONS_LENGTH; i++) {
+                if (!this.answers[i]) {
+                    this.$Message.error('还有评价未选！');
+                    return;
+                }
+                // 构建答案
+                if (typeof this.answers[i] === 'string') {
+                    answers.push(this.changeEndToNum(this.answers[i].substr(0, 1)));
+                } else {
+                    let answer = [];
+                    for (let j = 0; j < this.answers[i].length; j++) {
+                        answer.push(this.changeEndToNum(this.answers[i][j].substr(0, 1)));
+                    }
+                    answers.push(answer.sort());
+                }
+            }
+            this.delPerson();
+            // answers 为已选答案
+            // do something
+        },
+        /**
+         * 删除当前被评价人
+         */
+        delPerson() {
+            for (let i = 0; this.ratePerson.length; i++) {
+                if (this.selectedPerson === this.ratePerson[i].id) {
+                    this.ratePerson.splice(i, 1);
+                    break;
+                }
+            }
+            this.selectedPerson = '';
+        },
+        /**
+         * 切换人员的时候将答案置为空
+         */
+        changePerson() {
+            this.answers = [];
         }
     }
 }
