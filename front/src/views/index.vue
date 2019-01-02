@@ -45,7 +45,7 @@
     background-color: #f5f5f5;
 }
 .main .layout {
-    height: 100%;
+    min-height: 100%;
 }
 .main .header {
     overflow: hidden;
