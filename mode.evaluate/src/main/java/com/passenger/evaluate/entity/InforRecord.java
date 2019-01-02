@@ -6,6 +6,21 @@ public class InforRecord {
 	private String clerktoname;
 	private String subjectid;
 	private String answerid;
+	private Integer modifynum;
+	private Float  score;
+	
+	public Float getScore() {
+		return score;
+	}
+	public void setScore(Float score) {
+		this.score = score;
+	}
+	public Integer getModifynum() {
+		return modifynum;
+	}
+	public void setModifynum(Integer modifynum) {
+		this.modifynum = modifynum;
+	}
 	public String getClerkfrom() {
 		return clerkfrom;
 	}

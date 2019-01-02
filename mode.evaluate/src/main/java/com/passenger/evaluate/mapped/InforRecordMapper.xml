@@ -7,6 +7,8 @@
     <id column="SUBJECTID" property="subjectid" jdbcType="VARCHAR" />
     <id column="ANSWERID " property="answerid" jdbcType="VARCHAR" />
     <result column="CLERKTONAME" property="clerktoname" jdbcType="VARCHAR" />
+    <result column="MODIFYNUM" property="modifynum" jdbcType="INTEGER" />
+    <result column="SCORE" property="score" jdbcType="DOUBLE" />
   </resultMap>
   <select id="selectByClerkFromto" resultMap="BaseResultMap">
   	select * from t_inforRecord 
@@ -15,16 +17,16 @@
   </select>
   
   <update id="updateByAnswerid" parameterType="com.passenger.evaluate.entity.InforRecord">
-  	update t_inforRecord set ANSWERID = #{answerid,jdbcType=VARCHAR} 
+  	update t_inforRecord set ANSWERID = #{answerid,jdbcType=VARCHAR},MODIFYNUM=1,SCORE=#{score,jdbcType=DOUBLE}
   	Where CLERKFROM=#{clerkfrom,jdbcType=VARCHAR} 
   		AND CLERKTO=#{clerkto,jdbcType=VARCHAR} 
   		AND SUBJECTID=#{subjectid,jdbcType=VARCHAR}
   </update>
   
   <insert id="insertByKeyPrmary" parameterType="com.passenger.evaluate.entity.InforRecord" >
-  	insert into t_inforRecord(CLERKFROM,CLERKTO,CLERKTONAME,SUBJECTID,ANSWERID)
+  	insert into t_inforRecord(CLERKFROM,CLERKTO,CLERKTONAME,SUBJECTID,ANSWERID,MODIFYNUM,SCORE)
   		values(#{clerkfrom,jdbcType=VARCHAR},#{clerkto,jdbcType=VARCHAR}
   				,#{clerktoname,jdbcType=VARCHAR},#{subjectid,jdbcType=VARCHAR}
-  				,#{answerid,jdbcType=VARCHAR})
+  				,#{answerid,jdbcType=VARCHAR},0,#{score,jdbcType=DOUBLE})
   </insert>
 </mapper>
