@@ -1,4 +1,5 @@
 module.exports = {
+//   baseUrl: './', // gh-pages 打包请务必加上这个
   lintOnSave: false,
   // 前端反向代理在这里设置
 //   devServer: {
