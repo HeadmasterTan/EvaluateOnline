@@ -81,7 +81,7 @@ export default {
 <style scoped>
 .rate {
     width: 70%;
-    height: calc(100vh - 64px);
+    min-height: calc(100vh - 64px);
     padding: 25px;
     position: relative;
     left: 50%;

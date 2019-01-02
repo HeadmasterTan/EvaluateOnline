@@ -176,9 +176,6 @@ export default {
 /* 选项内容 */
 .rate-content {
     padding-top: 25px;
-    height: calc(100% - 82px);
-    height: -moz-calc(100% - 82px);
-    height: -webkit-calc(100% - 82px);
     padding-bottom: 50px;
     overflow-y: auto;
 }
